@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using CryptoFashionAPI.Context;
 using CryptoFashionAPI.Model;
@@ -11,6 +12,11 @@ namespace CryptoFashionAPI.Repository
         public ClothesRepository(ClothesDbContext clothesDbContext)
         {
             _clothesDbContext = clothesDbContext;
+        }
+
+        public List<Shirt> GetAllShirts()
+        {
+            return _clothesDbContext.Shirts.ToList();
         }
 
         public Shirt GetShirt(int id)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CryptoFashionAPI.Model;
 using CryptoFashionAPI.Repository;
 
@@ -10,6 +11,11 @@ namespace CryptoFashionAPI.Service
         public ClothesService(IClothesRepository clothesRepository)
         {
             _clothesRepository = clothesRepository;
+        }
+
+        public List<Shirt> GetAllShirts()
+        {
+            return _clothesRepository.GetAllShirts();
         }
 
         public Shirt GetShirt(int id)

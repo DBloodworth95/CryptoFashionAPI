@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CryptoFashionAPI.Model;
 
 namespace CryptoFashionAPI.Repository
@@ -6,5 +7,6 @@ namespace CryptoFashionAPI.Repository
     {
         Shirt GetShirt(int id);
         Shirt AddShirt(Shirt shit);
+        List<Shirt> GetAllShirts();
     }
 }
