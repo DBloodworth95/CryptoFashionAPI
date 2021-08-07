@@ -44,5 +44,12 @@ namespace CryptoFashionAPI.Controllers
             _clothesService.DeleteShirt(id);
             return Ok();
         }
+
+        [HttpPut]
+        public IActionResult EditShirt([FromBody] Shirt shirt)
+        {
+            _clothesService.EditShirt(shirt);
+            return Ok();
+        }
     }
 }

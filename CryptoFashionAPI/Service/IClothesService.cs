@@ -9,5 +9,6 @@ namespace CryptoFashionAPI.Service
         Shirt AddShirt(Shirt shit);
         List<Shirt> GetAllShirts();
         void DeleteShirt(int id);
+        void EditShirt(Shirt shirt);
     }
 }

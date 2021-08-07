@@ -39,5 +39,12 @@ namespace CryptoFashionAPI.Repository
             _clothesDbContext.Shirts.Remove(shirtToDelete);
             _clothesDbContext.SaveChanges();
         }
+
+        public void EditShirt(Shirt shirt)
+        {
+            var shirtToEdit = _clothesDbContext.Shirts.First(s => s.ID == shirt.ID);
+            shirtToEdit.ShirtName = shirt.ShirtName;
+            _clothesDbContext.SaveChanges();
+        }
     }
 }

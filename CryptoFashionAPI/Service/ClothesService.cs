@@ -32,5 +32,10 @@ namespace CryptoFashionAPI.Service
         {
             _clothesRepository.DeleteShirt(id);
         }
+
+        public void EditShirt(Shirt shirt)
+        {
+            _clothesRepository.EditShirt(shirt);
+        }
     }
 }
