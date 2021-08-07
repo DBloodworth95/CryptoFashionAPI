@@ -19,7 +19,7 @@ namespace CryptoFashionAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("{id}", Name = "GetShirt")]
         public IActionResult GetShirt(int id)
         {
             return Ok(_clothesService.GetShirt(id));
