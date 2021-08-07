@@ -23,6 +23,7 @@ namespace CryptoFashionAPI.Controllers
         public IActionResult GetShirt(int id)
         {
             return Ok(_clothesService.GetShirt(id));
+            //test
         }
 
         [HttpPost]
