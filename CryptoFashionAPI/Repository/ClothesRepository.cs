@@ -21,7 +21,7 @@ namespace CryptoFashionAPI.Repository
 
         public Shirt GetShirt(int id)
         {
-            return _clothesDbContext.Shirts.First(shirt => shirt.ID == id);
+            return _clothesDbContext.Shirts.First(s => s.ID == id);
         }
 
         public Shirt AddShirt(Shirt shirt)
