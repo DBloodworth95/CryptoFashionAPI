@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CryptoFashionAPI.Context;
@@ -30,6 +31,13 @@ namespace CryptoFashionAPI.Repository
             _clothesDbContext.SaveChanges();
 
             return shirt;
+        }
+
+        public void DeleteShirt(int id)
+        {
+            var shirtToDelete = _clothesDbContext.Shirts.First(s => s.ID == id);
+            _clothesDbContext.Shirts.Remove(shirtToDelete);
+            _clothesDbContext.SaveChanges();
         }
     }
 }

@@ -37,5 +37,12 @@ namespace CryptoFashionAPI.Controllers
             var newShirt = _clothesService.AddShirt(shirt);
             return CreatedAtRoute("GetShirt", new { newShirt.ID }, newShirt);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteShirt(int id)
+        {
+            _clothesService.DeleteShirt(id);
+            return Ok();
+        }
     }
 }

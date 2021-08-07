@@ -8,5 +8,6 @@ namespace CryptoFashionAPI.Repository
         Shirt GetShirt(int id);
         Shirt AddShirt(Shirt shit);
         List<Shirt> GetAllShirts();
+        void DeleteShirt(int id);
     }
 }
