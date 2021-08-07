@@ -35,7 +35,7 @@ namespace CryptoFashionAPI.Controllers
         public IActionResult AddShirt(Shirt shirt)
         {
             var newShirt = _clothesService.AddShirt(shirt);
-            return CreatedAtRoute("AddShirt", new { newShirt.ID }, newShirt);
+            return CreatedAtRoute("GetShirt", new { newShirt.ID }, newShirt);
         }
     }
 }
