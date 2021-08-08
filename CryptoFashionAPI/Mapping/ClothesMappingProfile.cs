@@ -3,9 +3,9 @@ using CryptoFashionAPI.Model;
 
 namespace CryptoFashionAPI.Mapping
 {
-    public class ShirtMappingProfile : Profile
+    public class ClothesMappingProfile : Profile
     {
-        public ShirtMappingProfile()
+        public ClothesMappingProfile()
         {
             CreateMap<Shirt, Domain.Shirt>()
                 .ForMember(shirtDomain => shirtDomain.Id, o => o.MapFrom(shirtModel => shirtModel.ID)).ReverseMap()
