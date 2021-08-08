@@ -1,3 +1,4 @@
+using CryptoFashionAPI.Api;
 using CryptoFashionAPI.Domain;
 using CryptoFashionAPI.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -20,25 +21,29 @@ namespace CryptoFashionAPI.Controllers
         }
 
         [HttpGet]
+        [Route(Api.Route.GetAllShirts)]
         public IActionResult GetAllShirts()
         {
             return Ok(_clothesService.GetAllShirts());
         }
 
-        [HttpGet("{id}", Name = "GetShirt")]
+        [HttpGet]
+        [Route(Route.GetShirt + "{id}", Name = RouteName.AddShirt)]
         public IActionResult GetShirt(int id)
         {
             return Ok(_clothesService.GetShirt(id));
         }
 
         [HttpPost]
+        [Route(Api.Route.AddShirt)]
         public IActionResult AddShirt(Shirt shirt)
         {
             var newShirt = _clothesService.AddShirt(shirt);
-            return CreatedAtRoute("GetShirt", new { newShirt.Id }, newShirt);
+            return CreatedAtRoute(RouteName.AddShirt, new { newShirt.Id }, newShirt);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route(Api.Route.DeleteShirt + "{id}")]
         public IActionResult DeleteShirt(int id)
         {
             _clothesService.DeleteShirt(id);
@@ -46,6 +51,7 @@ namespace CryptoFashionAPI.Controllers
         }
 
         [HttpPut]
+        [Route(Api.Route.EditShirt)]
         public IActionResult EditShirt([FromBody] Shirt shirt)
         {
             _clothesService.EditShirt(shirt);
