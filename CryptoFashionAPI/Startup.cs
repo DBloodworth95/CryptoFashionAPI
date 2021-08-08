@@ -1,3 +1,4 @@
+using AutoMapper;
 using CryptoFashionAPI.Context;
 using CryptoFashionAPI.Repository;
 using CryptoFashionAPI.Service;
@@ -39,7 +40,8 @@ namespace CryptoFashionAPI
 
             services.AddTransient<IClothesRepository, ClothesRepository>();
             services.AddTransient<IClothesService, ClothesService>();
-            
+
+            services.AddAutoMapper(typeof(Startup).Assembly);
             
             services.AddControllers();
             services.AddSwaggerGen(c =>
