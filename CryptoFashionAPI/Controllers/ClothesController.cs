@@ -1,4 +1,4 @@
-using CryptoFashionAPI.Model;
+using CryptoFashionAPI.Domain;
 using CryptoFashionAPI.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -35,7 +35,7 @@ namespace CryptoFashionAPI.Controllers
         public IActionResult AddShirt(Shirt shirt)
         {
             var newShirt = _clothesService.AddShirt(shirt);
-            return CreatedAtRoute("GetShirt", new { newShirt.ID }, newShirt);
+            return CreatedAtRoute("GetShirt", new { newShirt.Id }, newShirt);
         }
 
         [HttpDelete("{id}")]

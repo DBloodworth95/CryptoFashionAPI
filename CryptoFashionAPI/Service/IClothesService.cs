@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using CryptoFashionAPI.Model;
+using CryptoFashionAPI.Domain;
 
 namespace CryptoFashionAPI.Service
 {

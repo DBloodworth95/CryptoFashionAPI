@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using CryptoFashionAPI.Model;
+using AutoMapper;
+using CryptoFashionAPI.Domain;
 using CryptoFashionAPI.Repository;
 
 namespace CryptoFashionAPI.Service
@@ -8,24 +9,28 @@ namespace CryptoFashionAPI.Service
     {
         private readonly IClothesRepository _clothesRepository;
 
-        public ClothesService(IClothesRepository clothesRepository)
+        private readonly IMapper _mapper;
+
+        public ClothesService(IClothesRepository clothesRepository, IMapper mapper)
         {
             _clothesRepository = clothesRepository;
+            _mapper = mapper;
         }
 
         public List<Shirt> GetAllShirts()
         {
-            return _clothesRepository.GetAllShirts();
+            return _mapper.Map<List<Shirt>>(_clothesRepository.GetAllShirts());
         }
 
         public Shirt GetShirt(int id)
         {
-            return _clothesRepository.GetShirt(id);
+            return _mapper.Map<Shirt>(_clothesRepository.GetShirt(id));
         }
 
         public Shirt AddShirt(Shirt shirt)
         {
-            return _clothesRepository.AddShirt(shirt);
+            var mappedShirt = _mapper.Map<Model.Shirt>(shirt);
+            return _mapper.Map<Shirt>(_clothesRepository.AddShirt(mappedShirt));
         }
 
         public void DeleteShirt(int id)
@@ -35,7 +40,8 @@ namespace CryptoFashionAPI.Service
 
         public void EditShirt(Shirt shirt)
         {
-            _clothesRepository.EditShirt(shirt);
+            var mappedShirt = _mapper.Map<Model.Shirt>(shirt);
+            _mapper.Map<Shirt>(_clothesRepository.EditShirt(mappedShirt));
         }
     }
 }

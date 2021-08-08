@@ -8,8 +8,8 @@ namespace CryptoFashionAPI.Mapping
         public ShirtMappingProfile()
         {
             CreateMap<Shirt, Domain.Shirt>()
-                .ForMember(shirtDomain => shirtDomain.Id, o => o.MapFrom(shirtModel => shirtModel.ID))
-                .ForMember(shirtDomain => shirtDomain.ShirtName, o => o.MapFrom(shirtModel => shirtModel.ShirtName));
+                .ForMember(shirtDomain => shirtDomain.Id, o => o.MapFrom(shirtModel => shirtModel.ID)).ReverseMap()
+                .ForMember(shirtDomain => shirtDomain.ShirtName, o => o.MapFrom(shirtModel => shirtModel.ShirtName)).ReverseMap();
         }
     }
 }
