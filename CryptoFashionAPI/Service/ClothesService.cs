@@ -17,9 +17,15 @@ namespace CryptoFashionAPI.Service
             _mapper = mapper;
         }
 
-        public List<Shirt> GetAllShirts()
+        public List<Shirt> GetAllShirts(PaginationFilter paginationFilter)
         {
-            return _mapper.Map<List<Shirt>>(_clothesRepository.GetAllShirts());
+            if (paginationFilter == null)
+            {
+                return _mapper.Map<List<Shirt>>(_clothesRepository.GetAllShirts());
+            }
+
+            var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+            return _mapper.Map<List<Shirt>>(_clothesRepository.GetAllShirts(skip, paginationFilter.PageSize));
         }
 
         public Shirt GetShirt(int id)

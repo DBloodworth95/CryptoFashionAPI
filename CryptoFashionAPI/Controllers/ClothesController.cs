@@ -13,19 +13,26 @@ namespace CryptoFashionAPI.Controllers
     {
         private readonly IClothesService _clothesService;
 
+        private readonly IPaginationService _paginationService;
+
         private readonly ILogger<ClothesController> _logger;
 
-        public ClothesController(IClothesService clothesService, ILogger<ClothesController> logger)
+        public ClothesController(IClothesService clothesService, IPaginationService paginationService, ILogger<ClothesController> logger)
         {
             _clothesService = clothesService;
+            _paginationService = paginationService;
             _logger = logger;
         }
 
         [HttpGet]
         [Route(Route.GetAllShirts)]
-        public IActionResult GetAllShirts()
+        public IActionResult GetAllShirts([FromQuery]PaginationQuery paginationQuery)
         {
-            return Ok(new ResponseEnvelope<List<Shirt>>(_clothesService.GetAllShirts()));
+            var paginationFilter = _paginationService.ApplyPaginationFilter(paginationQuery);
+            var shirts = _clothesService.GetAllShirts(paginationFilter);
+
+            var paginatedShirts = new PagedResponse<Shirt>(shirts);
+            return Ok(paginatedShirts);
         }
 
         [HttpGet]

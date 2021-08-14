@@ -14,9 +14,17 @@ namespace CryptoFashionAPI.Repository
             _clothesDbContext = clothesDbContext;
         }
 
-        public List<Shirt> GetAllShirts()
+        public List<Shirt> GetAllShirts(int skip, int pageSize)
         {
-            return _clothesDbContext.Shirts.ToList();
+            if (skip == 0)
+            {
+                return _clothesDbContext.Shirts.ToList();
+            }
+
+            return _clothesDbContext.Shirts
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
         }
 
         public Shirt GetShirt(int id)
