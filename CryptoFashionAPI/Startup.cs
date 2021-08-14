@@ -40,6 +40,7 @@ namespace CryptoFashionAPI
 
             services.AddTransient<IClothesRepository, ClothesRepository>();
             services.AddTransient<IClothesService, ClothesService>();
+            services.AddTransient<IPaginationService, PaginationService>();
 
             services.AddAutoMapper(typeof(Startup).Assembly);
             
