@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CryptoFashionAPI.Context;
@@ -16,9 +17,12 @@ namespace CryptoFashionAPI.Repository
 
         public List<Shirt> GetAllShirts(int skip, int pageSize)
         {
+            Console.WriteLine(skip + " " + pageSize);
             if (skip == 0)
             {
-                return _clothesDbContext.Shirts.ToList();
+                return _clothesDbContext.Shirts
+                    .Take(pageSize)
+                    .ToList();
             }
 
             return _clothesDbContext.Shirts
