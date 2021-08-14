@@ -9,7 +9,7 @@ namespace CryptoFashionAPI.Api
 
         public int? PageNumber { get; set; }
 
-        public int? PageSzie { get; set; }
+        public int? PageSize { get; set; }
 
         public string NextPage { get; set; }
 
