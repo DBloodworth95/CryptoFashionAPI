@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CryptoFashionAPI.Api;
 using CryptoFashionAPI.Domain;
 using CryptoFashionAPI.Service;
@@ -24,14 +25,14 @@ namespace CryptoFashionAPI.Controllers
         [Route(Route.GetAllShirts)]
         public IActionResult GetAllShirts()
         {
-            return Ok(_clothesService.GetAllShirts());
+            return Ok(new ResponseEnvelope<List<Shirt>>(_clothesService.GetAllShirts()));
         }
 
         [HttpGet]
         [Route(Route.GetShirt + "{id}", Name = RouteName.AddShirt)]
         public IActionResult GetShirt(int id)
         {
-            return Ok(_clothesService.GetShirt(id));
+            return Ok(new ResponseEnvelope<Shirt>(_clothesService.GetShirt(id)));
         }
 
         [HttpPost]
