@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using CryptoFashionAPI.Api;
 using CryptoFashionAPI.Domain;
+using CryptoFashionAPI.Helper;
 using CryptoFashionAPI.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,23 +15,33 @@ namespace CryptoFashionAPI.Controllers
 
         private readonly IPaginationService _paginationService;
 
+        private readonly IUriService _uriService;
+
         private readonly ILogger<ClothesController> _logger;
 
-        public ClothesController(IClothesService clothesService, IPaginationService paginationService, ILogger<ClothesController> logger)
+        public ClothesController(IClothesService clothesService, IPaginationService paginationService,
+            IUriService uriService
+            , ILogger<ClothesController> logger)
         {
             _clothesService = clothesService;
             _paginationService = paginationService;
+            _uriService = uriService;
             _logger = logger;
         }
 
         [HttpGet]
         [Route(Route.GetAllShirts)]
-        public IActionResult GetAllShirts([FromQuery]PaginationQuery paginationQuery)
+        public IActionResult GetAllShirts([FromQuery] PaginationQuery paginationQuery)
         {
             var paginationFilter = _paginationService.GetPaginationFilter(paginationQuery);
             var shirts = _clothesService.GetAllShirts(paginationFilter);
 
-            var paginatedShirts = new PagedResponse<Shirt>(shirts);
+            if (paginationFilter == null || paginationFilter.PageNumber < 1 || paginationFilter.PageSize < 1)
+            {
+                return Ok(new PagedResponse<Shirt>(shirts));
+            }
+
+            var paginatedShirts = PaginationHelper.GenerateResponse(_uriService, paginationFilter, shirts);
             return Ok(paginatedShirts);
         }
 
@@ -47,7 +57,9 @@ namespace CryptoFashionAPI.Controllers
         public IActionResult AddShirt(Shirt shirt)
         {
             var newShirt = _clothesService.AddShirt(shirt);
-            return CreatedAtRoute(RouteName.AddShirt, new { newShirt.Id }, newShirt);
+
+            var locationUri = _uriService.GetShirtUri(shirt.Id.ToString());
+            return Created(locationUri, new ResponseEnvelope<Shirt>(newShirt));
         }
 
         [HttpDelete]
