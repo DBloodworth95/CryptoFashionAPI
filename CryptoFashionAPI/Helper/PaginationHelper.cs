@@ -24,8 +24,8 @@ namespace CryptoFashionAPI.Helper
             return new PagedResponse<T>
             {
                 Data = response,
-                PageNumber = paginationFilter.PageNumber >= 1 ? paginationFilter.PageNumber : (int?)null,
-                PageSize = paginationFilter.PageSize >= 1 ? paginationFilter.PageSize : (int?)null,
+                PageNumber = paginationFilter.PageNumber >= 1 ? paginationFilter.PageNumber : null,
+                PageSize = paginationFilter.PageSize >= 1 ? paginationFilter.PageSize : null,
                 NextPage = response.Any() ? nextPage : null,
                 PreviousPage = previousPage
             };
