@@ -26,8 +26,9 @@ namespace CryptoFashionAPI.Service
             {
                 return uri;
             }
-            
-            var modifiedUri = QueryHelpers.AddQueryString(_baseUri, "pageNumber", paginationQuery.PageNumber.ToString());
+
+            var modifiedUri = QueryHelpers.AddQueryString(_baseUri + Route.BaseClothes + Route.GetAllShirts,
+                "pageNumber", paginationQuery.PageNumber.ToString());
             modifiedUri = QueryHelpers.AddQueryString(modifiedUri, "pageSize", paginationQuery.PageSize.ToString());
             return new Uri(modifiedUri);
         }

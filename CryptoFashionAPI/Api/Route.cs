@@ -2,6 +2,8 @@ namespace CryptoFashionAPI.Api
 {
     public class Route
     {
+        public const string BaseClothes = "Clothes/";
+        
         public const string GetAllShirts = "getallshirts";
 
         public const string GetShirt = "getshirt/";
