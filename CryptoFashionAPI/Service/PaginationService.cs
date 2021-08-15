@@ -13,7 +13,7 @@ namespace CryptoFashionAPI.Service
             _mapper = mapper;
         }
 
-        public PaginationFilter ApplyPaginationFilter(PaginationQuery paginationQuery)
+        public PaginationFilter GetPaginationFilter(PaginationQuery paginationQuery)
         {
             return _mapper.Map<PaginationFilter>(paginationQuery);
         }

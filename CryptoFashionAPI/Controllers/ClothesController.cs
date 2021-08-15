@@ -28,7 +28,7 @@ namespace CryptoFashionAPI.Controllers
         [Route(Route.GetAllShirts)]
         public IActionResult GetAllShirts([FromQuery]PaginationQuery paginationQuery)
         {
-            var paginationFilter = _paginationService.ApplyPaginationFilter(paginationQuery);
+            var paginationFilter = _paginationService.GetPaginationFilter(paginationQuery);
             var shirts = _clothesService.GetAllShirts(paginationFilter);
 
             var paginatedShirts = new PagedResponse<Shirt>(shirts);

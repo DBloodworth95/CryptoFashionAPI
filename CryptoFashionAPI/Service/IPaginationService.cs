@@ -5,6 +5,6 @@ namespace CryptoFashionAPI.Service
 {
     public interface IPaginationService
     {
-        PaginationFilter ApplyPaginationFilter(PaginationQuery paginationQuery);
+        PaginationFilter GetPaginationFilter(PaginationQuery paginationQuery);
     }
 }
