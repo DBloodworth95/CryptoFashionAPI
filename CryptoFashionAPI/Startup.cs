@@ -4,9 +4,11 @@ using CryptoFashionAPI.Repository;
 using CryptoFashionAPI.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
@@ -34,6 +36,8 @@ namespace CryptoFashionAPI
                             .AllowAnyMethod();
                     });
             });
+            
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddDbContext<ClothesDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
@@ -41,6 +45,13 @@ namespace CryptoFashionAPI
             services.AddTransient<IClothesRepository, ClothesRepository>();
             services.AddTransient<IClothesService, ClothesService>();
             services.AddTransient<IPaginationService, PaginationService>();
+            services.AddTransient<IUriService, UriService>(provider =>
+            {
+                var accessor = provider.GetRequiredService<IHttpContextAccessor>();
+                var request = accessor.HttpContext?.Request;
+                var absoluteUri = string.Concat(request?.Scheme, "://", request?.Host.ToUriComponent(), "/");
+                return new UriService(absoluteUri);
+            });
 
             services.AddAutoMapper(typeof(Startup).Assembly);
             
