@@ -25,12 +25,12 @@ namespace CryptoFashionAPI.Service
                 return _mapper.Map<List<Shirt>>(_clothesRepository.GetAllShirts());
             }
 
-            var skip = paginationFilter.PageNumber * paginationFilter.PageSize;
-            if (paginationFilter.PageNumber == 0)
-            {
-                skip = 0;
-            }
-            return _mapper.Map<List<Shirt>>(_clothesRepository.GetAllShirts(skip, paginationFilter.PageSize));
+            //TODO: Refactor this to be included in the PaginationHelper
+            int paginationFilterPageSize = paginationFilter.PageSize < 0
+                ? paginationFilter.PageSize = 100
+                : paginationFilter.PageSize;
+            var skip = paginationFilter.PageNumber == 0 ? 0 : paginationFilter.PageNumber * paginationFilterPageSize;
+            return _mapper.Map<List<Shirt>>(_clothesRepository.GetAllShirts(skip, paginationFilterPageSize));
         }
 
         public Shirt GetShirt(int id)
