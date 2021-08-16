@@ -21,11 +21,13 @@ namespace CryptoFashionAPI.Repository
             if (skip == 0)
             {
                 return _clothesDbContext.Shirts
+                    .OrderBy(s => s.ID)
                     .Take(pageSize)
                     .ToList();
             }
 
             return _clothesDbContext.Shirts
+                .OrderBy(s => s.ID)
                 .Skip(skip)
                 .Take(pageSize)
                 .ToList();
