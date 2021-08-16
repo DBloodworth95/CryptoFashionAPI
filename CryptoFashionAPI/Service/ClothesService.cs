@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AutoMapper;
 using CryptoFashionAPI.Domain;
@@ -25,6 +26,10 @@ namespace CryptoFashionAPI.Service
             }
 
             var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+            if (paginationFilter.PageNumber == 0)
+            {
+                skip = 0;
+            }
             return _mapper.Map<List<Shirt>>(_clothesRepository.GetAllShirts(skip, paginationFilter.PageSize));
         }
 

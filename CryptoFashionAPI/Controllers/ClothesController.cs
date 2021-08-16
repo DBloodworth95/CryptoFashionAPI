@@ -37,7 +37,7 @@ namespace CryptoFashionAPI.Controllers
             var shirts = _clothesService.GetAllShirts(paginationFilter);
             var totalShirts = _clothesService.GetShirtCount();
 
-            if (paginationFilter == null || paginationFilter.PageNumber < 1 || paginationFilter.PageSize < 1)
+            if (paginationFilter == null || paginationFilter.PageNumber < 0 || paginationFilter.PageSize < 0)
             {
                 return Ok(new PagedResponse<Shirt>(shirts));
             }
