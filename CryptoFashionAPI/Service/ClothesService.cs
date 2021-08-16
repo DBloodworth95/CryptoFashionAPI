@@ -25,7 +25,7 @@ namespace CryptoFashionAPI.Service
                 return _mapper.Map<List<Shirt>>(_clothesRepository.GetAllShirts());
             }
 
-            var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+            var skip = paginationFilter.PageNumber * paginationFilter.PageSize;
             if (paginationFilter.PageNumber == 0)
             {
                 skip = 0;
