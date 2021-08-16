@@ -49,5 +49,10 @@ namespace CryptoFashionAPI.Service
             var mappedShirt = _mapper.Map<Model.Shirt>(shirt);
             _mapper.Map<Shirt>(_clothesRepository.EditShirt(mappedShirt));
         }
+
+        public int GetShirtCount()
+        {
+            return _clothesRepository.GetShirtCount();
+        }
     }
 }

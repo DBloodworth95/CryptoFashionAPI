@@ -10,5 +10,6 @@ namespace CryptoFashionAPI.Repository
         List<Shirt> GetAllShirts(int skip = 0, int pageSize = 0);
         void DeleteShirt(int id);
         Shirt EditShirt(Shirt shirt);
+        int GetShirtCount();
     }
 }

@@ -15,6 +15,8 @@ namespace CryptoFashionAPI.Api
 
         public string PreviousPage { get; set; }
 
+        public int TotalRowCount { get; set; }
+
         public PagedResponse()
         {
         }

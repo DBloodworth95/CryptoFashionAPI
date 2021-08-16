@@ -59,5 +59,10 @@ namespace CryptoFashionAPI.Repository
 
             return shirt;
         }
+
+        public int GetShirtCount()
+        {
+            return _clothesDbContext.Shirts.Count();
+        }
     }
 }

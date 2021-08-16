@@ -9,7 +9,7 @@ namespace CryptoFashionAPI.Helper
     public class PaginationHelper
     {
         public static PagedResponse<T> GenerateResponse<T>(IUriService uriService, PaginationFilter paginationFilter,
-            List<T> response)
+            List<T> response, int totalShirts)
         {
             var nextPage = paginationFilter.PageNumber >= 1
                 ? uriService.GetAllShirtsUri(new PaginationQuery(paginationFilter.PageNumber + 1,
@@ -27,7 +27,8 @@ namespace CryptoFashionAPI.Helper
                 PageNumber = paginationFilter.PageNumber >= 1 ? paginationFilter.PageNumber : null,
                 PageSize = paginationFilter.PageSize >= 1 ? paginationFilter.PageSize : null,
                 NextPage = response.Any() ? nextPage : null,
-                PreviousPage = previousPage
+                PreviousPage = previousPage,
+                TotalRowCount = totalShirts
             };
         }
     }

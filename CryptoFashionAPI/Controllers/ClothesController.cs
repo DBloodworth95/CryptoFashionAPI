@@ -35,13 +35,14 @@ namespace CryptoFashionAPI.Controllers
         {
             var paginationFilter = _paginationService.GetPaginationFilter(paginationQuery);
             var shirts = _clothesService.GetAllShirts(paginationFilter);
+            var totalShirts = _clothesService.GetShirtCount();
 
             if (paginationFilter == null || paginationFilter.PageNumber < 1 || paginationFilter.PageSize < 1)
             {
                 return Ok(new PagedResponse<Shirt>(shirts));
             }
 
-            var paginatedShirts = PaginationHelper.GenerateResponse(_uriService, paginationFilter, shirts);
+            var paginatedShirts = PaginationHelper.GenerateResponse(_uriService, paginationFilter, shirts, totalShirts);
             return Ok(paginatedShirts);
         }
 
