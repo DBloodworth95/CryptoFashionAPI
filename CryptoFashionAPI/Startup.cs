@@ -41,9 +41,13 @@ namespace CryptoFashionAPI
 
             services.AddDbContext<ClothesDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
+            services.AddDbContext<ShoesDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
 
             services.AddTransient<IClothesRepository, ClothesRepository>();
             services.AddTransient<IClothesService, ClothesService>();
+            services.AddTransient<IShoesRepository, ShoesRepository>();
+            services.AddTransient<IShoesService, ShoesService>();
             services.AddTransient<IPaginationService, PaginationService>();
             services.AddTransient<IUriService, UriService>(provider =>
             {
